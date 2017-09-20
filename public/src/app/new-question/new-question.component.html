@@ -1,0 +1,20 @@
+<a [routerLink]="['/']">Home</a>
+
+<a [routerLink]="['/index']">Logout</a>
+
+<h1>New Question</h1>
+<form (submit)="saveQuestion()">
+  <label>Question: 
+    <input type="text" name="question" required minlength="10" [(ngModel)] = "newQuestion.question" #newquestion = "ngModel" />
+  </label>
+  <p></p>
+  <label>Details:
+    <input type="text" name="description" [(ngModel)] = "newQuestion.description" #question = "ngModel" />
+  </label>
+  <input type="submit" value="Submit" [disabled] = "newquestion.invalid" />
+  <a [routerLink]="['/']">Cancel</a>
+</form>
+<div style="color: red;" *ngIf="!newquestion.valid && (newquestion.dirty || newquestion.touched)">
+  <p *ngIf="newquestion.errors.required">Question is Required</p> 
+  <p *ngIf="newquestion.errors.minlength">Question must be at least 10 characters long</p> 
+</div>

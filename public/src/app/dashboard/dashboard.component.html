@@ -1,0 +1,41 @@
+<h1>Hi {{currentUser}}!</h1>
+<a [routerLink]="['/index']">Logout</a>
+
+<a [routerLink]="['/new_question']">Add a Question</a>
+
+<form>
+  <label>Search: 
+    <input type="text" name="search" placeholder="Search" [(ngModel)]="searchVal" (keyup)="searchQuestions()" />
+  </label>
+</form>
+
+<table *ngIf="hasNotUsedSearch">
+  <tr>
+    <th>Question</th>
+    <th>Answer</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor="let question of questions">
+    <td>{{question.question}}</td>
+    <td>{{question.answers.length}}</td>
+    <td>
+      <a [routerLink]="['/question', question._id]">Show</a>
+      <a [routerLink]="['/question', question._id,'new_answer']">Answer</a>
+    </td>
+  </tr>
+</table>
+<table *ngIf="!hasNotUsedSearch">
+  <tr>
+    <th>Question</th>
+    <th>Answer</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor="let question of showQuestions">
+    <td>{{question.question}}</td>
+    <td>{{question.answers.length}}</td>
+    <td>
+      <a [routerLink]="['/question', question._id]">Show</a>
+      <a [routerLink]="['/question', question._id,'new_answer']">Answer</a>
+    </td>
+  </tr>
+</table>

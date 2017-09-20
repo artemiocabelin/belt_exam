@@ -1,0 +1,22 @@
+<a [routerLink]="['/index']">Logout</a>
+
+<a [routerLink]="['/']">Home</a>
+<a [routerLink]="['/question', question._id]">Go Back to Question</a>
+
+<h1>{{question.question}}</h1>
+<p>{{question.description}}</p>
+<form (submit)="submitAnswer(question._id)">
+  <label>Your Answer: 
+    <input type="text" name="answer" required minlength="5" [(ngModel)] = "newAnswer.answer" #newr = "ngModel" />
+  </label>
+  <label>Supporting Details for your answer (optional): 
+    <input type="text" name="detail" [(ngModel)] = "newAnswer.details" #newDetail = "ngModel"/>
+  </label>
+  <input type="submit" value="Submit" [disabled] = "newr.invalid" />
+  <a [routerLink]="['/']">Cancel</a>
+</form>
+
+<div style="color: red;" *ngIf="!newr.valid && (newr.dirty || newr.touched)">
+  <p *ngIf="newr.errors.required">Answer is Required</p> 
+  <p *ngIf="newr.errors.minlength">Answer must be at least 5 characters long</p> 
+</div>

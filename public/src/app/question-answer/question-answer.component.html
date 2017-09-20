@@ -1,0 +1,15 @@
+<a [routerLink]="['/index']">Logout</a>
+
+<a [routerLink]="['/']">Home</a>
+<a [routerLink]="['/question', question._id, 'new_answer']">Answer this Question</a>
+
+<h1>{{question.question}}</h1>
+<p>{{question.description}}</p>
+
+<div *ngFor="let answer of sortedAnswers, let idx=index">
+  <p>{{answer.creator}}</p>
+  <p>{{answer.answer}}</p>
+  <p>{{answer.details}}</p>
+  <p>{{answer.likes}} likes</p>
+  <button (click)="addLike(answer._id)">Like!</button>
+</div>
